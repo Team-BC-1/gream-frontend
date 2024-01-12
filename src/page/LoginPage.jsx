@@ -9,9 +9,12 @@ import Container from '@mui/material/Container'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
+import useUserInfoStore from '../store/userInfo.js'
+import { jwtDecode } from 'jwt-decode'
 
 export default function LoginPage () {
   const navigate = useNavigate()
+  const { setAccessToken, setRefreshToken, setNickname } = useUserInfoStore()
 
   const mutation = useMutation({
     mutationFn: (userinfo) => axios.post(
@@ -20,7 +23,16 @@ export default function LoginPage () {
       {
         'Content-Type': 'application/json',
       }),
-    onSuccess: () => navigate('/')
+    onSuccess: (data) => {
+      console.log(data.headers)
+      const accessToken = data.headers['access-token']
+      const refreshToken = data.headers['refresh-token']
+      setAccessToken(accessToken)
+      setRefreshToken(refreshToken)
+      const jwt = jwtDecode(accessToken)
+      setNickname(jwt.sub)
+      navigate('/')
+    }
   })
 
   const onClick = (event) => {
