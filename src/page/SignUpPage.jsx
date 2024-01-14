@@ -8,6 +8,7 @@ import { Grid, Link } from '@mui/material'
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
+import Layout from '../component/layout/Layout.jsx'
 
 const SignUpPage = () => {
   const navigate = useNavigate()
@@ -35,68 +36,70 @@ const SignUpPage = () => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline/>
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <Box component="form" onSubmit={onClick} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="id"
-            label="id"
-            name="id"
-            autoComplete="id"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="nickname"
-            label="nickname"
-            name="nickname"
-            autoComplete="nickname"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+    <Layout>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline/>
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">
             Sign up
-          </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link onClick={() => navigate('/login')} variant="body2">
-                Sign in
-              </Link>
+          </Typography>
+          <Box component="form" onSubmit={onClick} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="id"
+              label="id"
+              name="id"
+              autoComplete="id"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="nickname"
+              label="nickname"
+              name="nickname"
+              autoComplete="nickname"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link onClick={() => navigate('/login')} variant="body2">
+                  Sign in
+                </Link>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Layout>
   )
 }
 

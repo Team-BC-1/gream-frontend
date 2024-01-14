@@ -11,6 +11,7 @@ import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import useUserInfoStore from '../store/userInfo.js'
 import { jwtDecode } from 'jwt-decode'
+import Layout from '../component/layout/Layout.jsx'
 
 export default function LoginPage () {
   const navigate = useNavigate()
@@ -45,55 +46,57 @@ export default function LoginPage () {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline/>
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Login
-        </Typography>
-        <Box component="form" noValidate onSubmit={onClick} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="id"
-                label="id"
-                name="id"
-                autoComplete="id"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-              />
-            </Grid>
-          </Grid>
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+    <Layout>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline/>
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">
             Login
-          </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link onClick={() => navigate('/signup')} variant="body2">
-                {'Sign up'}
-              </Link>
+          </Typography>
+          <Box component="form" noValidate onSubmit={onClick} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="id"
+                  label="id"
+                  name="id"
+                  autoComplete="id"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
             </Grid>
-          </Grid>
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              Login
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link onClick={() => navigate('/signup')} variant="body2">
+                  {'Sign up'}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Layout>
   )
 }
