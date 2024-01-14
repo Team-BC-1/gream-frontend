@@ -25,7 +25,6 @@ export default function LoginPage () {
         'Content-Type': 'application/json',
       }),
     onSuccess: (data) => {
-      console.log(data.headers)
       const accessToken = data.headers['access-token']
       const refreshToken = data.headers['refresh-token']
       setAccessToken(accessToken)
