@@ -10,12 +10,11 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import useUserInfoStore from '../store/userInfo.js'
-import { jwtDecode } from 'jwt-decode'
 import Layout from '../component/layout/Layout.jsx'
 
 export default function LoginPage () {
   const navigate = useNavigate()
-  const { setAccessToken, setRefreshToken, setNickname } = useUserInfoStore()
+  const { setAccessToken, setRefreshToken, setNickname, setLoginId } = useUserInfoStore()
 
   const mutation = useMutation({
     mutationFn: (userinfo) => axios.post(
@@ -25,13 +24,15 @@ export default function LoginPage () {
         'Content-Type': 'application/json',
       }),
     onSuccess: (data) => {
-      const accessToken = data.headers['access-token']
-      const refreshToken = data.headers['refresh-token']
-      setAccessToken(accessToken)
-      setRefreshToken(refreshToken)
-      const jwt = jwtDecode(accessToken)
-      setNickname(jwt.sub)
+      const { loginId, nickname } = data.data.data
+      setAccessToken(data.headers['access-token'])
+      setRefreshToken(data.headers['refresh-token'])
+      setNickname(nickname)
+      setLoginId(loginId)
       navigate('/')
+    },
+    onError: error => {
+      alert(error.response.data.message)
     }
   })
 
