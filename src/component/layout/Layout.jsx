@@ -5,7 +5,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header/>
-      <Container fixed maxWidth={'sm'}>
+      <Container maxWidth={'sm'} sx={{ display: 'flex', justifyContent: 'center' }}>
         <main>{children}</main>
       </Container>
     </>
