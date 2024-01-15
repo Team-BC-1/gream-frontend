@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import MainPage from './page/MainPage.jsx'
 import LoginPage from './page/LoginPage.jsx'
 import SignUpPage from './page/SignUpPage.jsx'
+import ProductPage from './page/ProductPage.jsx'
+import ProfilePage from './page/ProfilePage.jsx'
 
 const Router = () => {
   return (
@@ -10,6 +12,8 @@ const Router = () => {
         <Route path="/" element={<MainPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/signup" element={<SignUpPage/>}/>
+        <Route path="/profile" element={<ProfilePage/>}/>
+        <Route path="/products/:productId" element={<ProductPage/>}/>
       </Routes>
     </BrowserRouter>
   )
