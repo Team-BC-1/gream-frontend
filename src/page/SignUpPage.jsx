@@ -19,7 +19,10 @@ const SignUpPage = () => {
       userinfo,
       { 'Content-Type': 'application/json' }
     ),
-    onSuccess: () => navigate('/login')
+    onSuccess: () => navigate('/login'),
+    onError: error => {
+      alert(error.response.data.message)
+    }
   })
 
   const onClick = (event) => {
