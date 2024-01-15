@@ -2,8 +2,8 @@ import Layout from '../component/layout/Layout.jsx'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import ProductCard from '../component/ProductCard.jsx'
-import { List, ListItem } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import Grid from '@mui/material/Grid'
 
 function MainPage () {
   const navigate = useNavigate()
@@ -16,15 +16,15 @@ function MainPage () {
   return (
     <>
       <Layout>
-        <List sx={{ display: 'flex', flexDirection: 'row' }}>
+        <Grid container spacing={2}>
           {
             query.isSuccess && query.data.data.data.map((product) =>
-              <ListItem onClick={() => navigate(`/products/${product.id}`)} key={product.id}>
+              <Grid item xs={2} onClick={() => navigate(`/products/${product.id}`)} key={product.id}>
                 <ProductCard product={product}/>
-              </ListItem>
+              </Grid>
             )
           }
-        </List>
+        </Grid>
       </Layout>
     </>
   )
