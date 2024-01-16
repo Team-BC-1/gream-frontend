@@ -11,7 +11,15 @@ import axios from 'axios'
 
 const CustomAppBar = () => {
   const navigate = useNavigate()
-  const { nickname, accessToken, refreshToken, setNickname, setAccessToken, setRefreshToken } = useUserInfoStore()
+  const {
+    nickname,
+    accessToken,
+    refreshToken,
+    setNickname,
+    setLoginId,
+    setAccessToken,
+    setRefreshToken
+  } = useUserInfoStore()
   const mutation = useMutation({
     mutationFn: () => axios.post(
       `${import.meta.env.VITE_SERVER_URL}/api/users/logout`,
@@ -25,17 +33,19 @@ const CustomAppBar = () => {
       }),
     onSuccess: () => {
       setNickname('')
+      setLoginId('')
       setAccessToken('')
       setRefreshToken('')
     }
   })
 
-  const loginOrProfileHandler = () => nickname === '' ? navigate('/login') : navigate('/profile')
+  const loginOrProfileHandler = () => navigate(nickname === '' ? '/login' : '/profile')
   const signupOrLogoutHandler = () => {
     if (nickname === '') {
       navigate('/signup')
       return
     }
+    
     const isLogout = confirm('로그아웃 하시겠습니까?')
     if (isLogout) {
       mutation.mutate()
