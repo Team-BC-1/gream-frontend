@@ -5,8 +5,10 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header/>
-      <Container>
-        <main>{children}</main>
+      <Container sx={{ display: 'flex', justifyContent: 'center' }}>
+        <main>
+          {children}
+        </main>
       </Container>
     </>
   )
