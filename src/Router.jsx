@@ -4,6 +4,7 @@ import LoginPage from './page/LoginPage.jsx'
 import SignUpPage from './page/SignUpPage.jsx'
 import ProductPage from './page/ProductPage.jsx'
 import ProfilePage from './page/ProfilePage.jsx'
+import BuyPage from './page/BuyPage.jsx'
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/signup" element={<SignUpPage/>}/>
         <Route path="/profile" element={<ProfilePage/>}/>
         <Route path="/products/:productId" element={<ProductPage/>}/>
+        <Route path="/buy/:productId" element={<BuyPage/>}/>
       </Routes>
     </BrowserRouter>
   )
