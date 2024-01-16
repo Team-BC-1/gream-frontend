@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 function ProductCard ({ product }) {
-  const { brand, productName, imageUrl, description, price } = product
+  const { brand, name, imageUrl, price } = product
 
   return (
     <Card
@@ -16,19 +16,22 @@ function ProductCard ({ product }) {
         image={imageUrl}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography variant="body2" color="text.secondary">
           {brand}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {productName}
+        <Typography variant="string" component="div">
+          {name}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">{price}</Button>
-        <Button size="small">{description}</Button>
+        <Button size="small" sx={{ color: '#EF6253' }}>구매가: {addCommasAtMoney(price)}</Button>
       </CardActions>
     </Card>
   )
+}
+
+function addCommasAtMoney (money) {
+  return money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + '원'
 }
 
 export default ProductCard
