@@ -8,18 +8,10 @@ const useUserInfoStore = create(
       refreshToken: '',
       nickname: '',
       loginId: '',
-      setAccessToken: (accessToken) => set({
-        accessToken
-      }),
-      setRefreshToken: (refreshToken) => set({
-        refreshToken
-      }),
-      setNickname: (nickname) => set({
-        nickname
-      }),
-      setLoginId: (loginId) => set({
-        loginId
-      })
+      setAccessToken: (accessToken) => set({ accessToken }),
+      setRefreshToken: (refreshToken) => set({ refreshToken }),
+      setNickname: (nickname) => set({ nickname }),
+      setLoginId: (loginId) => set({ loginId })
     }),
     {
       name: 'user-info-storage'
