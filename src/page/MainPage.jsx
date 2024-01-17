@@ -19,7 +19,7 @@ function MainPage () {
         <Grid container spacing={2}>
           {
             query.isSuccess && query.data.data.data.map((product) =>
-              <Grid item xs={2} onClick={() => navigate(`/products/${product.id}`)} key={product.id}>
+              <Grid item md={2} xs={6} onClick={() => navigate(`/products/${product.id}`)} key={product.id}>
                 <ProductCard product={product}/>
               </Grid>
             )
