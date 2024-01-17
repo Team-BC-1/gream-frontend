@@ -51,7 +51,8 @@ function ProductPage () {
       {
         queryProduct.isSuccess && queryBuyBid.isSuccess && querySellBid.isSuccess && queryTradeHistory.isSuccess && (
           <Grid container spacing={2}>
-            <Grid item sm={12} md={6} sx={{ display: 'flex', justifyContent: 'center', padding: 10 }}>
+            <Grid item sm={12} md={6}
+                  sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', marginTop: 3 }}>
               <Box
                 component="img"
                 src={queryProduct.data.data.data.imageUrl}
