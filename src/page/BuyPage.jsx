@@ -1,7 +1,7 @@
 import Layout from '../component/layout/Layout.jsx'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { Card, CardContent, InputAdornment, Tab, Tabs } from '@mui/material'
 import { useEffect, useState } from 'react'
@@ -16,7 +16,8 @@ function BuyPage () {
   const { state } = useLocation()
   const { nickname } = useUserInfoStore()
   const [wantBuyPrice, setWantBuyPrice] = useState()
-  const [value, setValue] = useState(0)
+  const [tabIndex, setTabIndex] = useState(0)
+  const { accessToken, refreshToken } = useUserInfoStore()
 
   useEffect(() => {
     if (state === null) {
@@ -34,15 +35,56 @@ function BuyPage () {
     queryKey: ['sellHistory'],
     queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/sell`)
   })
+  const queryBuyBid = useQuery({
+    queryKey: ['buyHistory'],
+    queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/buy`)
+  })
 
   if (querySellBid.isSuccess) {
-    console.log(querySellBid.data.data.data)
+    console.log('판매 입찰 내역 : ', querySellBid.data.data.data)
   }
+  if (queryBuyBid.isSuccess) {
+    console.log('구매 입찰 내역 : ', queryBuyBid.data.data.data)
+  }
+
+  const buyBidMutation = useMutation(({
+    mutationFn: (price) => axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/api/buy/${productId}`,
+      {
+        price: price
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Token': accessToken,
+          'Refresh-Token': refreshToken
+        }
+      }),
+    onSuccess: () => alert('성공!'),
+    onError: error => alert(error.response.data.message)
+  }))
+
+  const buyNowMutation = useMutation(({
+    mutationFn: (price) => axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/api/buy/${productId}/now`,
+      {
+        price: price
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Token': accessToken,
+          'Refresh-Token': refreshToken
+        }
+      }),
+    onSuccess: () => alert('성공!'),
+    onError: error => alert(error.response.data.message)
+  }))
 
   return (
     <Layout sx={{ display: 'flex', justifyContent: 'center' }}>
       {
-        querySellBid.isSuccess && (
+        querySellBid.isSuccess && queryBuyBid.isSuccess && (
           <Box component={'div'} sx={{
             display: 'flex',
             alignItems: 'center',
@@ -59,49 +101,53 @@ function BuyPage () {
               </CardContent>
             </Card>
             <Box sx={{ flex: 1 }}>
-              <Box sx={{ flex: 1 }}>즉시 구매가 : 10,000원</Box>
-              <Box sx={{ flex: 1 }}>즉시 판매가 : 10,000원</Box>
+              <Box sx={{ flex: 1 }}>즉시 구매가 : {addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)}</Box>
+              <Box sx={{ flex: 1 }}>즉시 판매가 :{addCommasAtMoney(queryBuyBid.data.data.data[0].buyPrice)}</Box>
             </Box>
-            <Tabs value={value} onChange={(event, newValue) => setValue(newValue)} aria-label="basic tabs example">
+            <Tabs value={tabIndex} onChange={(event, newValue) => setTabIndex(newValue)} aria-label="basic tabs example">
               <Tab label="구매 입찰"/>
               <Tab label="즉시 구매"/>
             </Tabs>
 
-            <Box value={value} index={0} hidden={value !== 0} sx={{ width: '100%' }}>
+            <Box value={tabIndex} index={0} hidden={tabIndex !== 0} sx={{ width: '100%' }}>
               <TextField
                 id="buy-want-price"
                 label="구매 희망가"
                 variant="standard"
                 fullWidth
                 value={wantBuyPrice}
-                onChange
+                onChange={(event) => setWantBuyPrice(event.target.value)}
                 InputProps={{ endAdornment: <InputAdornment position="end">원</InputAdornment> }}
               />
               <Button
                 variant="contained"
                 fullWidth={true}
-                onClick={() => {}}
+                disabled={buyBidMutation.isPending}
+                onClick={() => {
+                  console.log(wantBuyPrice)
+                  buyBidMutation.mutate(wantBuyPrice)
+                }}
                 sx={{ backgroundColor: '#EF6253' }}
               >
                 구매 입찰
               </Button>
             </Box>
 
-            <Box value={value} index={1} hidden={value !== 1} sx={{ width: '100%' }}>
+            <Box value={tabIndex} index={1} hidden={tabIndex !== 1} sx={{ width: '100%' }}>
               <TextField
                 id="buy-want-price"
                 label="즉시 구매가"
                 variant="standard"
                 fullWidth
-                value={100000}
-                onChange
+                value={querySellBid.data.data.data[0].sellPrice}
                 disabled
                 InputProps={{ endAdornment: <InputAdornment position="end">원</InputAdornment> }}
               />
               <Button
                 variant="contained"
                 fullWidth={true}
-                onClick={() => {}}
+                disabled={buyNowMutation.isPending}
+                onClick={() => buyNowMutation.mutate(querySellBid.data.data.data[0].sellPrice)}
                 sx={{ backgroundColor: '#EF6253' }}
               >
                 즉시 구매
@@ -112,6 +158,10 @@ function BuyPage () {
       }
     </Layout>
   )
+}
+
+function addCommasAtMoney (money) {
+  return money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + '원'
 }
 
 export default BuyPage
