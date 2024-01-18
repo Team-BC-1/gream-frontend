@@ -3,7 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import useUserInfoStore from '../store/userInfo.js'
 import { useEffect } from 'react'
 import Box from '@mui/material/Box'
-import { Card, CardContent, Divider } from '@mui/material'
+import { Card, CardContent } from '@mui/material'
+import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined'
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import SellOnprogressHistoryList from '../component/SellOnprogressHistoryList.jsx'
+import SellEndHistoryList from '../component/SellEndHistoryList.jsx'
+import BuyEndHistoryList from '../component/BuyEndHistoryList.jsx'
+import BuyOnprogressHistoryList from '../component/BuyOnprogressHistoryList.jsx'
 
 function ProfilePage () {
 
@@ -17,20 +24,46 @@ function ProfilePage () {
     }
   }, [loginId])
 
+  const queryUserPont = useQuery({
+    queryKey: ['userPoint'],
+    queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/points`,
+      {
+        headers: {
+          'Access-Token': accessToken,
+          'Refresh-Token': refreshToken
+        }
+      }
+    )
+  })
+
   return (
     <Layout>
-      <Box component={'h1'}>마이 페이지</Box>
-      <Card>
-        <CardContent>
-          {
-            nickname
-          }
-        </CardContent>
-      </Card>
-      <Divider/>
-
+      <Box maxWidth={900}>
+        <Box component={'h1'}>마이 페이지</Box>
+        <Card sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
+          <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+            {
+              nickname
+            }
+          </CardContent>
+          <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <SavingsOutlinedIcon/>
+            {
+              queryUserPont.isSuccess && addCommasAtMoney(queryUserPont.data.data.data.point)
+            }
+          </CardContent>
+        </Card>
+        <BuyOnprogressHistoryList/>
+        <BuyEndHistoryList/>
+        <SellOnprogressHistoryList/>
+        <SellEndHistoryList/>
+      </Box>
     </Layout>
   )
+}
+
+function addCommasAtMoney (money) {
+  return money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + 'p'
 }
 
 export default ProfilePage
