@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import { Card, CardContent, List, ListItem } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import useUserInfoStore from '../store/userInfo.js'
+import useUserInfoStore from '../../store/userInfo.js'
 
 function SellOnprogressHistoryList () {
   const { accessToken, refreshToken } = useUserInfoStore()

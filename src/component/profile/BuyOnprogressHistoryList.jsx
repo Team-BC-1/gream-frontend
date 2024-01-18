@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import { Card, CardContent, List, ListItem } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import useUserInfoStore from '../store/userInfo.js'
+import useUserInfoStore from '../../store/userInfo.js'
 
 function BuyOnprogressHistoryList () {
   const { accessToken, refreshToken } = useUserInfoStore()
@@ -24,7 +24,7 @@ function BuyOnprogressHistoryList () {
 
   return (
     <>
-      <Box component={'h2'}>진행중인 판매 입찰</Box>
+      <Box component={'h2'}>진행중인 구매 입찰</Box>
       <List sx={{ marginBottom: 10, display: 'flex', flexDirection: 'row', overflow: 'scroll' }}>
         {
           queryUserBuyOnprogressHistory.isSuccess && (

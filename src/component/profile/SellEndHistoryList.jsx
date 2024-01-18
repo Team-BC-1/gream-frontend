@@ -2,14 +2,14 @@ import Box from '@mui/material/Box'
 import { Card, CardContent, List, ListItem } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import useUserInfoStore from '../store/userInfo.js'
+import useUserInfoStore from '../../store/userInfo.js'
 
-function BuyEndHistoryList () {
+function SellEndHistoryList () {
   const { accessToken, refreshToken } = useUserInfoStore()
 
-  const queryUserBuyEndHistory = useQuery({
-    queryKey: ['userBuyEndHistory'],
-    queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/buy/history/end`,
+  const queryUserSellEndHistory = useQuery({
+    queryKey: ['userSellEndHistory'],
+    queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/sell/history/end`,
       {
         headers: {
           'Access-Token': accessToken,
@@ -20,17 +20,16 @@ function BuyEndHistoryList () {
 
   return (
     <>
-      <Box component={'h2'}>구매 완료</Box>
+      <Box component={'h2'}>판매 완료</Box>
       <List sx={{ marginBottom: 10, display: 'flex', flexDirection: 'row', overflow: 'scroll' }}>
         {
-          queryUserBuyEndHistory.isSuccess && (
-            queryUserBuyEndHistory.data.data.data.map(history =>
+          queryUserSellEndHistory.isSuccess && (
+            queryUserSellEndHistory.data.data.data.map(history =>
               (
                 <ListItem key={history.orderId}>
                   <Card sx={{ fontSize: 15, marginX: 1 }}>
-                    <CardContent>productBrand : {history.productBrand}</CardContent>
-                    <CardContent>productName : {history.productName}</CardContent>
-                    <CardContent>expectedPrice : {history.expectedPrice}</CardContent>
+                    <CardContent>brand : {history.brand}</CardContent>
+                    <CardContent>name : {history.name}</CardContent>
                     <CardContent>finalPrice : {history.finalPrice}</CardContent>
                   </Card>
                 </ListItem>
@@ -43,4 +42,4 @@ function BuyEndHistoryList () {
   )
 }
 
-export default BuyEndHistoryList
+export default SellEndHistoryList
