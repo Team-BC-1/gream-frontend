@@ -42,10 +42,7 @@ function BuyBidBox ({ wantBuyPrice, onChangeWantBuyPrice, productId, tabIndex, i
         variant="contained"
         fullWidth={true}
         disabled={buyBidMutation.isPending}
-        onClick={() => {
-          console.log(wantBuyPrice)
-          buyBidMutation.mutate(wantBuyPrice)
-        }}
+        onClick={() => buyBidMutation.mutate(wantBuyPrice)}
         sx={{ backgroundColor: '#EF6253' }}
       >
         구매 입찰

@@ -38,14 +38,6 @@ function BuyPage () {
     queryKey: ['buyHistory'],
     queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/buy`)
   })
-
-  if (querySellBid.isSuccess) {
-    console.log('판매 입찰 내역 : ', querySellBid.data.data.data)
-  }
-  if (queryBuyBid.isSuccess) {
-    console.log('구매 입찰 내역 : ', queryBuyBid.data.data.data)
-  }
-
   return (
     <Layout sx={{ display: 'flex', justifyContent: 'center' }}>
       {

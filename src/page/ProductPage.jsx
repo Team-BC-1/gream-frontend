@@ -30,22 +30,6 @@ function ProductPage () {
     queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/buy`)
   })
 
-  if (queryProduct.isSuccess) {
-    console.log('product', queryProduct.data.data.data)
-  }
-
-  if (queryTradeHistory.isSuccess) {
-    console.log('trade', queryTradeHistory.data.data.data.sort((e1, e2) => (e2.tradeDate - e1.tradeDate)))
-  }
-
-  if (querySellBid.isSuccess) {
-    console.log('sell', querySellBid.data.data.data)
-  }
-
-  if (queryBuyBid.isSuccess) {
-    console.log('buy', queryBuyBid.data.data.data)
-  }
-
   return (
     <Layout>
       {
