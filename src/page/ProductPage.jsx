@@ -5,10 +5,12 @@ import Layout from '../component/layout/Layout.jsx'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import { ButtonGroup, Tab, Table, TableBody, TableCell, TableHead, TableRow, Tabs } from '@mui/material'
+import { Tab, Tabs } from '@mui/material'
 import TradeLineChart from '../component/TradeLineChart.jsx'
-import TradeHistoryView from '../component/TradeHistoryView.jsx'
 import { useState } from 'react'
+import TradeHistoryList from '../component/product/TradeHistoryList.jsx'
+import SellHistoryList from '../component/product/SellHistoryList.jsx'
+import BuyHistoryList from '../component/product/BuyHistoryList.jsx'
 
 function ProductPage () {
   const { productId } = useParams()
@@ -94,26 +96,6 @@ function ProductPage () {
                 </Grid>
                 <Grid item xs={12}>
 
-                  <ButtonGroup fullWidth={true}>
-                    <Button>체결 거래</Button>
-                    <Button>판매 입찰</Button>
-                    <Button>구매 입찰</Button>
-                  </ButtonGroup>
-                  <Table size={'small'}>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>거래가</TableCell>
-                        <TableCell align={'right'}>거래일자</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {
-                        queryTradeHistory.isSuccess &&
-                        <TradeHistoryView tradeHistoryList={queryTradeHistory.data.data.data}/>
-                      }
-                    </TableBody>
-                  </Table>
-
                   <Tabs
                     value={tabIndex}
                     onChange={(event, newValue) => setTabIndex(newValue)}
@@ -122,6 +104,23 @@ function ProductPage () {
                     <Tab label="판매 입찰"/>
                     <Tab label="구매 입찰"/>
                   </Tabs>
+
+                  <TradeHistoryList
+                    tabIndex={tabIndex}
+                    index={0}
+                    tradeHistoryList={queryTradeHistory.data.data.data.slice(0, 5)}
+                  />
+
+                  <SellHistoryList
+                    tabIndex={tabIndex}
+                    index={1}
+                    sellHistoryList={querySellBid.data.data.data}
+                  />
+                  <BuyHistoryList
+                    tabIndex={tabIndex}
+                    index={2}
+                    buyHistoryList={queryBuyBid.data.data.data}
+                  />
 
                 </Grid>
               </Grid>
