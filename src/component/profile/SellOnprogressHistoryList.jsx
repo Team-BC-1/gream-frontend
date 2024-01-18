@@ -26,8 +26,8 @@ function SellOnprogressHistoryList () {
           queryUserSellOnprogressHistory.isSuccess && (
             queryUserSellOnprogressHistory.data.data.data.map(history =>
               (
-                <ListItem key={history.orderId}>
-                  <Card sx={{ fontSize: 15, marginX: 1 }}>
+                <ListItem key={history.sellId}>
+                  <Card sx={{ fontSize: 15, marginX: 1, width: 200 }}>
                     <CardContent>productBrand : {history.productBrand}</CardContent>
                     <CardContent>productName : {history.productName}</CardContent>
                     <CardContent>sellPrice : {history.sellPrice}</CardContent>

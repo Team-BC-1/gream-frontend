@@ -18,10 +18,6 @@ function BuyOnprogressHistoryList () {
       })
   })
 
-  if (queryUserBuyOnprogressHistory.isSuccess) {
-    console.log('queryUserBuyOnprogressHistory', queryUserBuyOnprogressHistory.data.data.data)
-  }
-
   return (
     <>
       <Box component={'h2'}>진행중인 구매 입찰</Box>
@@ -30,8 +26,8 @@ function BuyOnprogressHistoryList () {
           queryUserBuyOnprogressHistory.isSuccess && (
             queryUserBuyOnprogressHistory.data.data.data.map(history =>
               (
-                <ListItem key={history.orderId}>
-                  <Card sx={{ fontSize: 15, marginX: 1 }}>
+                <ListItem key={history.buyId}>
+                  <Card sx={{ fontSize: 15, marginX: 1, width: 200 }}>
                     <CardContent>productBrand : {history.productBrand}</CardContent>
                     <CardContent>productName : {history.productName}</CardContent>
                     <CardContent>discountPrice : {history.discountPrice}</CardContent>

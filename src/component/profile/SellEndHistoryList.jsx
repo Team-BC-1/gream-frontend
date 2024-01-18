@@ -21,15 +21,20 @@ function SellEndHistoryList () {
   return (
     <>
       <Box component={'h2'}>판매 완료</Box>
-      <List sx={{ marginBottom: 10, display: 'flex', flexDirection: 'row', overflow: 'scroll' }}>
+      <List sx={{
+        marginBottom: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        overflow: 'scroll',
+      }}>
         {
           queryUserSellEndHistory.isSuccess && (
             queryUserSellEndHistory.data.data.data.map(history =>
               (
                 <ListItem key={history.orderId}>
-                  <Card sx={{ fontSize: 15, marginX: 1 }}>
-                    <CardContent>brand : {history.brand}</CardContent>
-                    <CardContent>name : {history.name}</CardContent>
+                  <Card sx={{ fontSize: 15, marginX: 1, width: 200 }}>
+                    <CardContent>productBrand : {history.productBrand}</CardContent>
+                    <CardContent>productName : {history.productName}</CardContent>
                     <CardContent>finalPrice : {history.finalPrice}</CardContent>
                   </Card>
                 </ListItem>
