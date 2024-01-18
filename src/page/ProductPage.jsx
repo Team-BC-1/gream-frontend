@@ -102,7 +102,8 @@ function ProductPage () {
                 <Grid item xs={12}>
                   {
                     queryTradeHistory.isSuccess &&
-                    <TradeLineChart tradeList={queryTradeHistory.data.data.data.map(trade => trade.finalPrice)}/>
+                    <TradeLineChart
+                      tradeList={queryTradeHistory.data.data.data.reverse().map(trade => trade.finalPrice)}/>
                   }
                 </Grid>
                 <Grid item xs={12}>
