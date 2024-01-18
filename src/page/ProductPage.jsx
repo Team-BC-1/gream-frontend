@@ -5,13 +5,15 @@ import Layout from '../component/layout/Layout.jsx'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import { ButtonGroup, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+import { ButtonGroup, Tab, Table, TableBody, TableCell, TableHead, TableRow, Tabs } from '@mui/material'
 import TradeLineChart from '../component/TradeLineChart.jsx'
 import TradeHistoryView from '../component/TradeHistoryView.jsx'
+import { useState } from 'react'
 
 function ProductPage () {
   const { productId } = useParams()
   const navigate = useNavigate()
+  const [tabIndex, setTabIndex] = useState(0)
 
   const queryProduct = useQuery({
     queryKey: ['product'],
@@ -91,6 +93,7 @@ function ProductPage () {
                   }
                 </Grid>
                 <Grid item xs={12}>
+
                   <ButtonGroup fullWidth={true}>
                     <Button>체결 거래</Button>
                     <Button>판매 입찰</Button>
@@ -110,6 +113,16 @@ function ProductPage () {
                       }
                     </TableBody>
                   </Table>
+
+                  <Tabs
+                    value={tabIndex}
+                    onChange={(event, newValue) => setTabIndex(newValue)}
+                  >
+                    <Tab label="체결 거래"/>
+                    <Tab label="판매 입찰"/>
+                    <Tab label="구매 입찰"/>
+                  </Tabs>
+
                 </Grid>
               </Grid>
             </Grid>

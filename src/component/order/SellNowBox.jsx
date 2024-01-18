@@ -5,10 +5,12 @@ import Button from '@mui/material/Button'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import useUserInfoStore from '../../store/userInfo.js'
+import { useNavigate } from 'react-router-dom'
 
 function SellNowBox ({ sellNowPrice, productId, tabIndex, index }) {
 
   const { accessToken, refreshToken } = useUserInfoStore()
+  const navigate = useNavigate()
 
   const sellNowMutation = useMutation(({
     mutationFn: (price) => axios.post(
@@ -24,7 +26,10 @@ function SellNowBox ({ sellNowPrice, productId, tabIndex, index }) {
           'Refresh-Token': refreshToken
         }
       }),
-    onSuccess: () => alert('성공!'),
+    onSuccess: () => {
+      alert('판매 성공!')
+      navigate('/profile')
+    },
     onError: error => alert(error.response.data.message)
   }))
 
