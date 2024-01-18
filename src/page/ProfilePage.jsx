@@ -7,10 +7,10 @@ import { Card, CardContent } from '@mui/material'
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import SellOnprogressHistoryList from '../component/SellOnprogressHistoryList.jsx'
-import SellEndHistoryList from '../component/SellEndHistoryList.jsx'
-import BuyEndHistoryList from '../component/BuyEndHistoryList.jsx'
-import BuyOnprogressHistoryList from '../component/BuyOnprogressHistoryList.jsx'
+import SellOnprogressHistoryList from '../component/profile/SellOnprogressHistoryList.jsx'
+import SellEndHistoryList from '../component/profile/SellEndHistoryList.jsx'
+import BuyEndHistoryList from '../component/profile/BuyEndHistoryList.jsx'
+import BuyOnprogressHistoryList from '../component/profile/BuyOnprogressHistoryList.jsx'
 
 function ProfilePage () {
 
