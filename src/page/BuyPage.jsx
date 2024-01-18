@@ -61,7 +61,10 @@ function BuyPage () {
               <Box sx={{ flex: 1 }}>즉시 구매가 : {addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)}</Box>
               <Box sx={{ flex: 1 }}>즉시 판매가 :{addCommasAtMoney(queryBuyBid.data.data.data[0].buyPrice)}</Box>
             </Box>
-            <Tabs value={tabIndex} onChange={(event, newValue) => setTabIndex(newValue)} aria-label="basic tabs example">
+            <Tabs
+              value={tabIndex}
+              onChange={(event, newValue) => setTabIndex(newValue)}
+            >
               <Tab label="구매 입찰"/>
               <Tab label="즉시 구매"/>
             </Tabs>
