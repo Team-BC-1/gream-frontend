@@ -86,7 +86,7 @@ function SellPage () {
               index={1}
               disabled={queryBuyBid.data.data.data.length === 0}
               productId={productId}
-              sellNowPrice={querySellBid.data.data.data[0].sellPrice}
+              sellNowPrice={queryBuyBid.data.data.data.length === 0 ? '-' : queryBuyBid.data.data.data[0].buyPrice}
             />
           </Box>
         )
