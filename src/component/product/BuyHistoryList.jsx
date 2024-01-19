@@ -4,10 +4,6 @@ import BuyHistoryView from './BuyHistoryView.jsx'
 
 function BuyHistoryList ({ tabIndex, index, buyHistoryList }) {
 
-  if (buyHistoryList) {
-    console.log('buyHistoryList', buyHistoryList)
-  }
-
   return (
     <Box
       hidden={tabIndex !== index}
