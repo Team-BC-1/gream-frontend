@@ -86,7 +86,7 @@ function BuyPage () {
             <BuyNowBox
               tabIndex={tabIndex}
               index={1}
-              disabled={querySellBid.data.data.data.length === 0}
+              isDisabled={querySellBid.data.data.data.length === 0}
               productId={productId}
               buyNowPrice={querySellBid.data.data.data.length === 0 ? '-' : querySellBid.data.data.data[0].sellPrice}
             />

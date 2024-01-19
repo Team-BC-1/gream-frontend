@@ -68,6 +68,8 @@ function SellPage () {
               }
               </Box>
             </Box>
+
+
             <Tabs value={tabIndex} onChange={(event, newValue) => setTabIndex(newValue)} aria-label="basic tabs example">
               <Tab label="판매 입찰"/>
               <Tab label="즉시 판매"/>
@@ -84,7 +86,7 @@ function SellPage () {
             <SellNowBox
               tabIndex={tabIndex}
               index={1}
-              disabled={queryBuyBid.data.data.data.length === 0}
+              isDisabled={queryBuyBid.data.data.data.length === 0}
               productId={productId}
               sellNowPrice={queryBuyBid.data.data.data.length === 0 ? '-' : queryBuyBid.data.data.data[0].buyPrice}
             />

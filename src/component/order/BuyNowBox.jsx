@@ -7,7 +7,7 @@ import axios from 'axios'
 import useUserInfoStore from '../../store/userInfo.js'
 import { useNavigate } from 'react-router-dom'
 
-function BuyNowBox ({ buyNowPrice, productId, tabIndex, index }) {
+function BuyNowBox ({ buyNowPrice, productId, tabIndex, index, isDisabled }) {
 
   const { accessToken, refreshToken } = useUserInfoStore()
   const navigate = useNavigate()
@@ -46,7 +46,7 @@ function BuyNowBox ({ buyNowPrice, productId, tabIndex, index }) {
       <Button
         variant="contained"
         fullWidth={true}
-        disabled={buyNowMutation.isPending}
+        disabled={buyNowMutation.isPending || isDisabled}
         onClick={() => buyNowMutation.mutate(buyNowPrice)}
         sx={{ backgroundColor: '#EF6253' }}
       >
