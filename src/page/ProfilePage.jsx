@@ -11,6 +11,7 @@ import SellOnprogressHistoryList from '../component/profile/SellOnprogressHistor
 import SellEndHistoryList from '../component/profile/SellEndHistoryList.jsx'
 import BuyEndHistoryList from '../component/profile/BuyEndHistoryList.jsx'
 import BuyOnprogressHistoryList from '../component/profile/BuyOnprogressHistoryList.jsx'
+import ProductLikeList from '../component/profile/ProductLikeList.jsx'
 
 function ProfilePage () {
 
@@ -57,6 +58,7 @@ function ProfilePage () {
         <BuyEndHistoryList/>
         <SellOnprogressHistoryList/>
         <SellEndHistoryList/>
+        <ProductLikeList/>
       </Box>
     </Layout>
   )
