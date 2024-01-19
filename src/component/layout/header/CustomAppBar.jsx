@@ -18,7 +18,8 @@ const CustomAppBar = () => {
     setNickname,
     setLoginId,
     setAccessToken,
-    setRefreshToken
+    setRefreshToken,
+    setLikes
   } = useUserInfoStore()
   const mutation = useMutation({
     mutationFn: () => axios.post(
@@ -36,6 +37,7 @@ const CustomAppBar = () => {
       setLoginId('')
       setAccessToken('')
       setRefreshToken('')
+      setLikes([])
     }
   })
 
@@ -45,7 +47,7 @@ const CustomAppBar = () => {
       navigate('/signup')
       return
     }
-    
+
     const isLogout = confirm('로그아웃 하시겠습니까?')
     if (isLogout) {
       mutation.mutate()
