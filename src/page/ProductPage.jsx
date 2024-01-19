@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import Layout from '../component/layout/Layout.jsx'
 import Grid from '@mui/material/Grid'
@@ -11,11 +11,15 @@ import { useState } from 'react'
 import TradeHistoryList from '../component/product/TradeHistoryList.jsx'
 import SellHistoryList from '../component/product/SellHistoryList.jsx'
 import BuyHistoryList from '../component/product/BuyHistoryList.jsx'
+import useUserInfoStore from '../store/userInfo.js'
+import TurnedInIcon from '@mui/icons-material/TurnedIn'
+import TurnedInNotIcon from '@mui/icons-material/TurnedInNot'
 
 function ProductPage () {
   const { productId } = useParams()
   const navigate = useNavigate()
   const [tabIndex, setTabIndex] = useState(0)
+  const { accessToken, refreshToken, likes, addLike, deleteLike } = useUserInfoStore()
 
   const queryProduct = useQuery({
     queryKey: ['product'],
@@ -33,6 +37,38 @@ function ProductPage () {
     queryKey: ['buyHistory'],
     queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/buy`)
   })
+
+  const productLikeMutation = useMutation({
+    mutationFn: () => axios.post(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/like`,
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Token': accessToken,
+          'Refresh-Token': refreshToken
+        }
+      }),
+    onSuccess: () => {
+      addLike(parseInt(productId))
+      alert('관심상품에 추가되었습니다.')
+    }
+  })
+  const productDislikeMutation = useMutation({
+    mutationFn: () => axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/dislike`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Token': accessToken,
+          'Refresh-Token': refreshToken
+        }
+      }),
+    onSuccess: () => {
+      deleteLike(parseInt(productId))
+      alert('관심상품에서 삭제되었습니다.')
+    }
+  })
+
+  const isLiked = likes.includes(parseInt(productId))
 
   return (
     <Layout>
@@ -83,7 +119,12 @@ function ProductPage () {
                   <Button
                     variant="outlined"
                     fullWidth={true}
-                    sx={{ color: '#000000', borderColor: '#EBEBEB' }}>
+                    sx={{ color: '#000000', borderColor: '#EBEBEB' }}
+                    onClick={() => isLiked ? productDislikeMutation.mutate() : productLikeMutation.mutate()}
+                  >
+                    {
+                      isLiked ? <TurnedInIcon/> : <TurnedInNotIcon/>
+                    }
                     관심상품
                   </Button>
                 </Grid>
