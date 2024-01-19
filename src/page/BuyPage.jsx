@@ -58,8 +58,14 @@ function BuyPage () {
               </CardContent>
             </Card>
             <Box sx={{ flex: 1 }}>
-              <Box sx={{ flex: 1 }}>즉시 구매가 : {addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)}</Box>
-              <Box sx={{ flex: 1 }}>즉시 판매가 :{addCommasAtMoney(queryBuyBid.data.data.data[0].buyPrice)}</Box>
+              <Box sx={{ flex: 1 }}>즉시 구매가 : {
+                queryBuyBid.data.data.data.length === 0 ? '매물이 없습니다.' : addCommasAtMoney(queryBuyBid.data.data.data[0].buyPrice)
+              }
+              </Box>
+              <Box sx={{ flex: 1 }}>즉시 판매가 : {
+                querySellBid.data.data.data.length === 0 ? '매물이 없습니다.' : addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)
+              }
+              </Box>
             </Box>
             <Tabs
               value={tabIndex}
@@ -80,6 +86,7 @@ function BuyPage () {
             <BuyNowBox
               tabIndex={tabIndex}
               index={1}
+              disabled={querySellBid.data.data.data.length === 0}
               productId={productId}
               buyNowPrice={querySellBid.data.data.data[0].sellPrice}
             />
