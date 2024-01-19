@@ -15,11 +15,7 @@ const CustomAppBar = () => {
     nickname,
     accessToken,
     refreshToken,
-    setNickname,
-    setLoginId,
-    setAccessToken,
-    setRefreshToken,
-    setLikes
+    reset
   } = useUserInfoStore()
   const mutation = useMutation({
     mutationFn: () => axios.post(
@@ -32,13 +28,7 @@ const CustomAppBar = () => {
           'Refresh-Token': refreshToken
         }
       }),
-    onSuccess: () => {
-      setNickname('')
-      setLoginId('')
-      setAccessToken('')
-      setRefreshToken('')
-      setLikes([])
-    }
+    onSuccess: () => reset()
   })
 
   const loginOrProfileHandler = () => navigate(nickname === '' ? '/login' : '/profile')

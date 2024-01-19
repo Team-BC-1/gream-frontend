@@ -14,7 +14,7 @@ import Layout from '../component/layout/Layout.jsx'
 
 export default function LoginPage () {
   const navigate = useNavigate()
-  const { setAccessToken, setRefreshToken, setNickname, setLoginId, setLikes } = useUserInfoStore()
+  const { login } = useUserInfoStore()
 
   const mutation = useMutation({
     mutationFn: (userinfo) => axios.post(
@@ -24,12 +24,8 @@ export default function LoginPage () {
         'Content-Type': 'application/json',
       }),
     onSuccess: (data) => {
-      const { loginId, nickname, likeProducts } = data.data.data
-      setAccessToken(data.headers['access-token'])
-      setRefreshToken(data.headers['refresh-token'])
-      setNickname(nickname)
-      setLoginId(loginId)
-      setLikes(likeProducts)
+      const { loginId, nickname, likeProductIds } = data.data.data
+      login(data.headers['access-token'], data.headers['refresh-token'], nickname, loginId, likeProductIds)
       navigate('/')
     },
     onError: error => {
