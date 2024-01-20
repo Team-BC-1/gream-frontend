@@ -27,14 +27,12 @@ const SignUpPage = () => {
 
   const onClick = (event) => {
     event.preventDefault()
-    console.log('url : ', `${import.meta.env.VITE_SERVER_URL}/api/users/signup`)
     const data = new FormData(event.currentTarget)
     const signupData = {
       loginId: data.get('id'),
       nickname: data.get('nickname'),
       password: data.get('password')
     }
-    console.log(signupData)
     mutation.mutate(signupData)
   }
 
