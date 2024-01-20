@@ -9,6 +9,7 @@ import { Card, CardContent, Tab, Tabs } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import SellBidBox from '../component/order/SellBidBox.jsx'
 import SellNowBox from '../component/order/SellNowBox.jsx'
+import Button from '@mui/material/Button'
 
 function SellPage () {
   const { productId } = useParams()
@@ -17,6 +18,7 @@ function SellPage () {
   const { nickname } = useUserInfoStore()
   const [wantSellPrice, setWantSellPrice] = useState()
   const [tabIndex, setTabIndex] = useState(0)
+  const [imageFile, setImageFile] = useState()
 
   useEffect(() => {
     if (state === null) {
@@ -69,6 +71,21 @@ function SellPage () {
               </Box>
             </Box>
 
+            <Button
+              variant="contained"
+              component="label"
+            >
+              Upload File
+              <input
+                type="file"
+                hidden
+                onChange={(event) => {
+                  event.preventDefault()
+                  setImageFile(event.target.files[0])
+                  console.log('file', imageFile)
+                }}
+              />
+            </Button>
 
             <Tabs value={tabIndex} onChange={(event, newValue) => setTabIndex(newValue)} aria-label="basic tabs example">
               <Tab label="판매 입찰"/>
@@ -80,6 +97,7 @@ function SellPage () {
               index={0}
               productId={productId}
               wantSellPrice={wantSellPrice}
+              imageFile={imageFile}
               onChangeWantSellPrice={(event) => setWantSellPrice(event.target.value)}
             />
 
@@ -88,6 +106,7 @@ function SellPage () {
               index={1}
               isDisabled={queryBuyBid.data.data.data.length === 0}
               productId={productId}
+              imageFile={imageFile}
               sellNowPrice={queryBuyBid.data.data.data.length === 0 ? '-' : queryBuyBid.data.data.data[0].buyPrice}
             />
           </Box>
