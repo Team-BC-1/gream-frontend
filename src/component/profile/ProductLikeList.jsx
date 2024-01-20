@@ -36,10 +36,10 @@ function ProductLikeList () {
               (
                 <ListItem key={product.id} onClick={() => navigate(`/products/${product.id}`)}>
                   <Card sx={{ fontSize: 15, marginX: 1, width: 200 }}>
-                    <CardContent>brand : {product.brand}</CardContent>
-                    <CardContent>name : {product.name}</CardContent>
-                    <CardContent>description : {product.description}</CardContent>
-                    <CardContent>price : {product.price}</CardContent>
+                    <CardContent>productBrand : {product.productBrand}</CardContent>
+                    <CardContent>productName : {product.productName}</CardContent>
+                    <CardContent>productDescription : {product.productDescription}</CardContent>
+                    <CardContent>productPrice : {product.productPrice}</CardContent>
                   </Card>
                 </ListItem>
               )
