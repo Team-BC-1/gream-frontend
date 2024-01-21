@@ -101,6 +101,7 @@ function ProductPage () {
                     sx={{ backgroundColor: '#EF6253' }}
                   >
                     구매
+                    - {querySellBid.data.data.data.length === 0 ? '매물 없음' : querySellBid.data.data.data[0].sellPrice + '원'}
                   </Button>
                 </Grid>
                 <Grid item xs={6}>
@@ -113,6 +114,7 @@ function ProductPage () {
                     sx={{ backgroundColor: '#41B979' }}
                   >
                     판매
+                    - {queryBuyBid.data.data.data.length === 0 ? '매물 없음' : queryBuyBid.data.data.data[0].buyPrice + '원'}
                   </Button>
                 </Grid>
                 <Grid item xs={12}>
