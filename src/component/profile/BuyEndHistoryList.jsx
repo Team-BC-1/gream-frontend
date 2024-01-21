@@ -3,9 +3,11 @@ import { Card, CardContent, List, ListItem } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import useUserInfoStore from '../../store/userInfo.js'
+import modalStore from '../../store/modalStore.js'
 
 function BuyEndHistoryList () {
   const { accessToken, refreshToken } = useUserInfoStore()
+  const { setGifticonImageModalState } = modalStore()
 
   const queryUserBuyEndHistory = useQuery({
     queryKey: ['userBuyEndHistory'],
@@ -26,7 +28,10 @@ function BuyEndHistoryList () {
           queryUserBuyEndHistory.isSuccess && (
             queryUserBuyEndHistory.data.data.data.map(history =>
               (
-                <ListItem key={history.orderId}>
+                <ListItem key={history.orderId} onClick={() => setGifticonImageModalState({
+                  isOpen: true,
+                  imageUrl: history.gifticonUrl
+                })}>
                   <Card sx={{ fontSize: 15, marginX: 1, width: 200 }}>
                     <CardContent>productBrand : {history.productBrand}</CardContent>
                     <CardContent>productName : {history.productName}</CardContent>
