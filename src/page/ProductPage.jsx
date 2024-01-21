@@ -27,7 +27,8 @@ function ProductPage () {
   })
   const queryTradeHistory = useQuery({
     queryKey: ['tradeHistory'],
-    queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/trade`)
+    queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/trade`),
+    
   })
   const querySellBid = useQuery({
     queryKey: ['sellHistory'],
@@ -134,7 +135,7 @@ function ProductPage () {
                   {
                     queryTradeHistory.isSuccess &&
                     <TradeLineChart
-                      tradeList={queryTradeHistory.data.data.data.reverse().map(trade => trade.finalPrice)}/>
+                      tradeList={queryTradeHistory.data.data.data.map(trade => trade.finalPrice)}/>
                   }
                 </Grid>
                 <Grid item xs={12}>
