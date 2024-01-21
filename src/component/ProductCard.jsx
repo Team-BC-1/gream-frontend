@@ -8,11 +8,12 @@ function ProductCard ({ product }) {
   return (
     <Card
       variant="outlined"
-      sx={{ maxWidth: 300 }}
+      sx={{ maxWidth: 300, height: 300 }}
     >
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt="gifticon product image"
+        sx={{ width: 150, height: 150, margin: 'auto', marginTop: 2 }}
         image={imageUrl}
       />
       <CardContent>
