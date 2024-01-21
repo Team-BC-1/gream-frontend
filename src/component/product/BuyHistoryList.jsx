@@ -11,7 +11,7 @@ function BuyHistoryList ({ tabIndex, index, buyHistoryList }) {
       <Table size={'small'}>
         <TableHead>
           <TableRow>
-            <TableCell>판매 희망가</TableCell>
+            <TableCell>구매 희망가</TableCell>
             <TableCell align={'right'}>수량</TableCell>
           </TableRow>
         </TableHead>
