@@ -62,11 +62,11 @@ function SellPage () {
             </Card>
             <Box sx={{ flex: 1 }}>
               <Box sx={{ flex: 1 }}>즉시 구매가 : {
-                queryBuyBid.data.data.data.length === 0 ? '매물이 없습니다.' : addCommasAtMoney(queryBuyBid.data.data.data[0].buyPrice)
+                querySellBid.data.data.data.length === 0 ? '매물이 없습니다.' : addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)
               }
               </Box>
               <Box sx={{ flex: 1 }}>즉시 판매가 : {
-                querySellBid.data.data.data.length === 0 ? '매물이 없습니다.' : addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)
+                queryBuyBid.data.data.data.length === 0 ? '매물이 없습니다.' : addCommasAtMoney(queryBuyBid.data.data.data[0].buyPrice)
               }
               </Box>
             </Box>
