@@ -34,7 +34,7 @@ function ProductLikeList () {
           queryProductLikes.isSuccess && (
             queryProductLikes.data.data.data.map(product =>
               (
-                <ListItem key={product.id} onClick={() => navigate(`/products/${product.id}`)}>
+                <ListItem key={product.id} onClick={() => navigate(`/products/${product.productId}`)}>
                   <Card sx={{ fontSize: 15, marginX: 1, width: 200 }}>
                     <CardContent>productBrand : {product.productBrand}</CardContent>
                     <CardContent>productName : {product.productName}</CardContent>
