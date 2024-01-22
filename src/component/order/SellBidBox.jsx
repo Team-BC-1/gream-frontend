@@ -52,7 +52,7 @@ function SellBidBox ({ wantSellPrice, onChangeWantSellPrice, productId, tabIndex
         fullWidth={true}
         disabled={sellBidMutation.isPending}
         onClick={() => sellBidMutation.mutate(wantSellPrice)}
-        sx={{ backgroundColor: '#EF6253' }}
+        sx={{ backgroundColor: '#41B979' }}
       >
         판매 입찰
       </Button>

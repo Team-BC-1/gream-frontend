@@ -52,7 +52,7 @@ function SellNowBox ({ sellNowPrice, productId, tabIndex, index, isDisabled, ima
         fullWidth={true}
         disabled={sellNowMutation.isPending || isDisabled}
         onClick={() => sellNowMutation.mutate(sellNowPrice)}
-        sx={{ backgroundColor: '#EF6253' }}
+        sx={{ backgroundColor: '#41B979' }}
       >
         즉시 판매
       </Button>
