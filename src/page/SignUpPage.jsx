@@ -9,9 +9,13 @@ import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../component/layout/Layout.jsx'
+import { useState } from 'react'
 
 const SignUpPage = () => {
   const navigate = useNavigate()
+  const [loginId, setLoginId] = useState('')
+  const [nickname, setNickname] = useState('')
+  const [password, setPassword] = useState('')
 
   const mutation = useMutation({
     mutationFn: (userinfo) => axios.post(
@@ -27,11 +31,10 @@ const SignUpPage = () => {
 
   const onClick = (event) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
     const signupData = {
-      loginId: data.get('id'),
-      nickname: data.get('nickname'),
-      password: data.get('password')
+      loginId: loginId,
+      nickname: nickname,
+      password: password
     }
     mutation.mutate(signupData)
   }
@@ -61,6 +64,9 @@ const SignUpPage = () => {
               name="id"
               autoComplete="id"
               autoFocus
+              value={loginId}
+              onChange={(event) => setLoginId(event.target.value)}
+              error={!(/^[a-zA-Z0-9]{4,20}$/.exec(loginId))}
             />
             <FormHelperText id="component-helper-text">
               아이디는 영문자 및 숫자 4-20자만 가능합니다.
@@ -74,6 +80,9 @@ const SignUpPage = () => {
               name="nickname"
               autoComplete="nickname"
               autoFocus
+              value={nickname}
+              onChange={(event) => setNickname(event.target.value)}
+              error={!(/^[a-zA-Z0-9가-힣]{2,20}$/.exec(nickname))}
             />
             <FormHelperText id="component-helper-text">
               닉네임은 한글, 영문자 및 숫자 2-20자만 가능합니다.
@@ -87,6 +96,9 @@ const SignUpPage = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              error={!(/^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9@#$%^&+=!]{8,30}$/.exec(password))}
             />
             <FormHelperText id="component-helper-text">
               비밀번호는 영소문자 및 숫자가 필수로 8-30자만 가능하고, 특수기호는 @#$%^&+= 만 포함합니다.
