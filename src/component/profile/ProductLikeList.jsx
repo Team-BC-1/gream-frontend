@@ -25,12 +25,14 @@ function ProductLikeList () {
   return (
     <>
       <Box component={'h2'}>관심 상품</Box>
-      <List sx={{
-        marginBottom: 10,
-        display: 'flex',
-        flexDirection: 'row',
-        overflow: 'scroll',
-      }}>
+      <List
+        key={queryProductLikes.data?.data?.data?.length}
+        sx={{
+          marginBottom: 10,
+          display: 'flex',
+          flexDirection: 'row',
+          overflow: 'scroll',
+        }}>
         {
           queryProductLikes.isSuccess && (
             queryProductLikes.data.data.data.map(product =>
