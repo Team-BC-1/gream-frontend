@@ -100,11 +100,17 @@ function SellPage () {
               variant="contained"
               component="label"
               sx={{ marginBottom: 2 }}
+              onClick={() => {
+
+              }}
             >
               기프티콘 이미지 업로드
               <input
                 type="file"
                 hidden
+                onClick={() => {
+                  alert('현재는 테스트 환경이고, 기프티콘 검수 API는 사업자 등록이 필요하여 미구현 상태입니다. 따라서 실제 기프티콘 이미지를 넣지 말아 주세요.')
+                }}
                 onChange={(event) => {
                   event.preventDefault()
                   setImageFile(encodeFileToBase64(event.target.files[0]))

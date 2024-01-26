@@ -53,7 +53,13 @@ function BuyBidBox ({ wantBuyPrice, onChangeWantBuyPrice, productId, tabIndex, i
         variant="contained"
         fullWidth={true}
         disabled={buyBidMutation.isPending}
-        onClick={() => buyBidMutation.mutate(wantBuyPrice)}
+        onClick={() => {
+          const isOk = confirm('현재 테스트 환경이라, 실제 기프티콘 이미지가 오지 않습니다. 이를 이해하였고 구매 입찰을 진행하시겠습니까?')
+          if (!isOk) {
+            return
+          }
+          buyBidMutation.mutate(wantBuyPrice)
+        }}
         sx={{ backgroundColor: '#EF6253' }}
       >
         구매 입찰

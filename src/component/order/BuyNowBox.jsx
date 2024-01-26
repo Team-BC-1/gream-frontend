@@ -13,18 +13,20 @@ function BuyNowBox ({ buyNowPrice, productId, tabIndex, index, isDisabled }) {
   const navigate = useNavigate()
 
   const buyNowMutation = useMutation(({
-    mutationFn: (price) => axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/api/buy/${productId}/now`,
-      {
-        price: price
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Token': accessToken,
-          'Refresh-Token': refreshToken
-        }
-      }),
+    mutationFn: (price) => {
+      axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/buy/${productId}/now`,
+        {
+          price: price
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Token': accessToken,
+            'Refresh-Token': refreshToken
+          }
+        })
+    },
     onSuccess: () => {
       alert('구매 성공!')
       navigate('/profile')
@@ -47,7 +49,13 @@ function BuyNowBox ({ buyNowPrice, productId, tabIndex, index, isDisabled }) {
         variant="contained"
         fullWidth={true}
         disabled={buyNowMutation.isPending || isDisabled}
-        onClick={() => buyNowMutation.mutate(buyNowPrice)}
+        onClick={() => {
+          const isOk = confirm('현재 테스트 환경이라, 실제 기프티콘 이미지가 오지 않습니다. 이를 이해하였고 구매 입찰을 진행하시겠습니까?')
+          if (!isOk) {
+            return
+          }
+          buyNowMutation.mutate(buyNowPrice)
+        }}
         sx={{ backgroundColor: '#EF6253' }}
       >
         즉시 구매
