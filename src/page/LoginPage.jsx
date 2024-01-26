@@ -11,10 +11,13 @@ import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import useUserInfoStore from '../store/userInfo.js'
 import Layout from '../component/layout/Layout.jsx'
+import { useState } from 'react'
 
 export default function LoginPage () {
   const navigate = useNavigate()
   const { login } = useUserInfoStore()
+  const [loginId, setLoginId] = useState('')
+  const [password, setPassword] = useState('')
 
   const mutation = useMutation({
     mutationFn: (userinfo) => axios.post(
@@ -35,10 +38,9 @@ export default function LoginPage () {
 
   const onClick = (event) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
     mutation.mutate({
-      loginId: data.get('id'),
-      password: data.get('password'),
+      loginId: loginId,
+      password: password,
     })
   }
 
@@ -67,6 +69,9 @@ export default function LoginPage () {
                   label="id"
                   name="id"
                   autoComplete="id"
+                  value={loginId}
+                  onChange={(event) => setLoginId(event.target.value)}
+                  error={!(/^[a-zA-Z0-9]{4,20}$/.exec(loginId))}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -78,6 +83,9 @@ export default function LoginPage () {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  error={!(/^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9@#$%^&+=!]{8,30}$/.exec(password))}
                 />
               </Grid>
             </Grid>
