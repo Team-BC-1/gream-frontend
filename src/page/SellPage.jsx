@@ -39,6 +39,7 @@ function SellPage () {
     queryKey: ['buyHistory'],
     queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/buy`)
   })
+
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader()
     reader.readAsDataURL(fileBlob)
@@ -62,24 +63,45 @@ function SellPage () {
             width: 500
           }}
           >
-            <Box sx={{ flex: 1 }}>
-              <Box sx={{ flex: 1 }}>즉시 구매가 : {
-                querySellBid.data.data.data.length === 0 ? '매물이 없습니다.' : addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)
+            <Box
+              sx={{
+                flex: 1,
+                flexDirection: 'row',
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginBottom: 2,
+                width: 500
+              }}
+            >
+              <Button
+                variant="contained"
+                fullWidth={true}
+                sx={{ backgroundColor: '#EF6253' }}
+              >
+                즉시 구매가 : {
+                querySellBid.data.data.data[0]?.sellPrice === undefined ? '매물이 없습니다.' : addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)
               }
-              </Box>
-              <Box sx={{ flex: 1 }}>즉시 판매가 : {
-                queryBuyBid.data.data.data.length === 0 ? '매물이 없습니다.' : addCommasAtMoney(queryBuyBid.data.data.data[0].buyPrice)
+              </Button>
+              <Button
+                variant="contained"
+                fullWidth={true}
+                sx={{ backgroundColor: '#41B979' }}
+              >
+                즉시 판매가 : {
+                queryBuyBid.data.data.data[0]?.buyPrice === undefined ? '매물이 없습니다.' : addCommasAtMoney(queryBuyBid.data.data.data[0].buyPrice)
               }
-              </Box>
+              </Button>
             </Box>
+
             <Box component={'img'} src={imageFile}>
 
             </Box>
             <Button
               variant="contained"
               component="label"
+              sx={{ marginBottom: 2 }}
             >
-              Upload File
+              기프티콘 이미지 업로드
               <input
                 type="file"
                 hidden

@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import useUserInfoStore from '../store/userInfo.js'
 import BuyBidBox from '../component/order/BuyBidBox.jsx'
 import BuyNowBox from '../component/order/BuyNowBox.jsx'
+import Button from '@mui/material/Button'
 
 function BuyPage () {
   const { productId } = useParams()
@@ -49,16 +50,36 @@ function BuyPage () {
             width: 500
           }}
           >
-            <Box sx={{ flex: 1 }}>
-              <Box sx={{ flex: 1 }}>즉시 구매가 : {
+            <Box
+              sx={{
+                flex: 1,
+                flexDirection: 'row',
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginBottom: 2,
+                width: 500
+              }}
+            >
+              <Button
+                variant="contained"
+                fullWidth={true}
+                sx={{ backgroundColor: '#EF6253' }}
+              >
+                즉시 구매가 : {
                 querySellBid.data.data.data[0]?.sellPrice === undefined ? '매물이 없습니다.' : addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)
               }
-              </Box>
-              <Box sx={{ flex: 1 }}>즉시 판매가 : {
+              </Button>
+              <Button
+                variant="contained"
+                fullWidth={true}
+                sx={{ backgroundColor: '#41B979' }}
+              >
+                즉시 판매가 : {
                 queryBuyBid.data.data.data[0]?.buyPrice === undefined ? '매물이 없습니다.' : addCommasAtMoney(queryBuyBid.data.data.data[0].buyPrice)
               }
-              </Box>
+              </Button>
             </Box>
+
             <Tabs
               value={tabIndex}
               onChange={(event, newValue) => setTabIndex(newValue)}
