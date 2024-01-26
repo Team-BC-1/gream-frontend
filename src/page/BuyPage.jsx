@@ -30,6 +30,14 @@ function BuyPage () {
     }
   }, [])
 
+  useEffect(() => {
+    if (querySellBid.data.data.data.length !== 0) {
+      if (wantBuyPrice >= querySellBid.data.data.data[0].sellPrice) {
+        setTabIndex(1)
+      }
+    }
+  }, [wantBuyPrice])
+
   const querySellBid = useQuery({
     queryKey: ['sellHistory'],
     queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/sell`)
