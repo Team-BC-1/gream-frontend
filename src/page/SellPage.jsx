@@ -5,8 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import Layout from '../component/layout/Layout.jsx'
 import Box from '@mui/material/Box'
-import { Card, CardContent, Tab, Tabs } from '@mui/material'
-import Typography from '@mui/material/Typography'
+import { Tab, Tabs } from '@mui/material'
 import SellBidBox from '../component/order/SellBidBox.jsx'
 import SellNowBox from '../component/order/SellNowBox.jsx'
 import Button from '@mui/material/Button'
@@ -40,6 +39,16 @@ function SellPage () {
     queryKey: ['buyHistory'],
     queryFn: () => axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${productId}/buy`)
   })
+  const encodeFileToBase64 = (fileBlob) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(fileBlob)
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageFile(reader.result)
+        resolve()
+      }
+    })
+  }
 
   return (
     <Layout sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -70,7 +79,9 @@ function SellPage () {
               }
               </Box>
             </Box>
+            <Box component={'img'} src={imageFile}>
 
+            </Box>
             <Button
               variant="contained"
               component="label"
@@ -81,8 +92,7 @@ function SellPage () {
                 hidden
                 onChange={(event) => {
                   event.preventDefault()
-                  setImageFile(event.target.files[0])
-                  console.log('file', imageFile)
+                  setImageFile(encodeFileToBase64(event.target.files[0]))
                 }}
               />
             </Button>
