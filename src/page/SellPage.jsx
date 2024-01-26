@@ -18,6 +18,7 @@ function SellPage () {
   const [wantSellPrice, setWantSellPrice] = useState()
   const [tabIndex, setTabIndex] = useState(0)
   const [imageFile, setImageFile] = useState()
+  const [imagePreview, setImagePreview] = useState()
 
   useEffect(() => {
     if (state === null) {
@@ -45,7 +46,7 @@ function SellPage () {
     reader.readAsDataURL(fileBlob)
     return new Promise((resolve) => {
       reader.onload = () => {
-        setImageFile(reader.result)
+        setImagePreview(reader.result)
         resolve()
       }
     })
@@ -93,16 +94,13 @@ function SellPage () {
               </Button>
             </Box>
 
-            <Box component={'img'} src={imageFile}>
+            <Box component={'img'} src={imagePreview}>
 
             </Box>
             <Button
               variant="contained"
               component="label"
               sx={{ marginBottom: 2 }}
-              onClick={() => {
-
-              }}
             >
               기프티콘 이미지 업로드
               <input
@@ -113,7 +111,8 @@ function SellPage () {
                 }}
                 onChange={(event) => {
                   event.preventDefault()
-                  setImageFile(encodeFileToBase64(event.target.files[0]))
+                  setImagePreview(encodeFileToBase64(event.target.files[0]))
+                  setImageFile(event.target.files[0])
                 }}
               />
             </Button>
