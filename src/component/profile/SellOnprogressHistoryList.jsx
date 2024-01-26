@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box'
-import { Card, CardContent, List, ListItem } from '@mui/material'
+import { Card, CardActions, CardContent, List, ListItem } from '@mui/material'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import useUserInfoStore from '../../store/userInfo.js'
@@ -49,14 +49,16 @@ function SellOnprogressHistoryList () {
                     <CardContent>productName : {history.productName}</CardContent>
                     <CardContent>sellPrice : {history.sellPrice}</CardContent>
                     <CardContent>bidDeadlineAt : {history.bidDeadlineAt}</CardContent>
-                    <Button
-                      variant="contained"
-                      disabled={mutationCancelSell.isPending}
-                      onClick={() => mutationCancelSell.mutate(history.sellId)}
-                      sx={{ backgroundColor: '#EF6253' }}
-                    >
-                      입찰 취소
-                    </Button>
+                    <CardActions>
+                      <Button
+                        variant="contained"
+                        disabled={mutationCancelSell.isPending}
+                        onClick={() => mutationCancelSell.mutate(history.sellId)}
+                        sx={{ backgroundColor: '#EF6253' }}
+                      >
+                        입찰 취소
+                      </Button>
+                    </CardActions>
                   </Card>
                 </ListItem>
               )

@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box'
-import { Card, CardContent, List, ListItem } from '@mui/material'
+import { Card, CardActions, CardContent, List, ListItem } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import useUserInfoStore from '../../store/userInfo.js'
 import modalStore from '../../store/modalStore.js'
+import Button from '@mui/material/Button'
 
 function BuyEndHistoryList () {
   const { accessToken, refreshToken } = useUserInfoStore()
@@ -28,15 +29,22 @@ function BuyEndHistoryList () {
           queryUserBuyEndHistory.isSuccess && (
             queryUserBuyEndHistory.data.data.data.map(history =>
               (
-                <ListItem key={history.orderId} onClick={() => setGifticonImageModalState({
-                  isOpen: true,
-                  imageUrl: history.gifticonUrl
-                })}>
+                <ListItem key={history.orderId}>
                   <Card sx={{ fontSize: 15, marginX: 1, width: 200 }}>
                     <CardContent>productBrand : {history.productBrand}</CardContent>
                     <CardContent>productName : {history.productName}</CardContent>
                     <CardContent>expectedPrice : {history.expectedPrice}</CardContent>
                     <CardContent>finalPrice : {history.finalPrice}</CardContent>
+                    <CardActions>
+                      <Button
+                        variant="contained"
+                        onClick={() => setGifticonImageModalState({
+                          isOpen: true,
+                          imageUrl: history.gifticonUrl
+                        })}>
+                        기프티콘 보기
+                      </Button>
+                    </CardActions>
                   </Card>
                 </ListItem>
               )
