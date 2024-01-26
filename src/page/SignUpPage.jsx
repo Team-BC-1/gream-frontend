@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { Grid, Link } from '@mui/material'
+import { FormHelperText, Grid, Link } from '@mui/material'
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
@@ -62,6 +62,9 @@ const SignUpPage = () => {
               autoComplete="id"
               autoFocus
             />
+            <FormHelperText id="component-helper-text">
+              아이디는 영문자 및 숫자 4-20자만 가능합니다.
+            </FormHelperText>
             <TextField
               margin="normal"
               required
@@ -72,6 +75,9 @@ const SignUpPage = () => {
               autoComplete="nickname"
               autoFocus
             />
+            <FormHelperText id="component-helper-text">
+              닉네임은 한글, 영문자 및 숫자 2-20자만 가능합니다.
+            </FormHelperText>
             <TextField
               margin="normal"
               required
@@ -82,6 +88,9 @@ const SignUpPage = () => {
               id="password"
               autoComplete="current-password"
             />
+            <FormHelperText id="component-helper-text">
+              비밀번호는 영소문자 및 숫자가 필수로 8-30자만 가능하고, 특수기호는 @#$%^&+= 만 포함합니다.
+            </FormHelperText>
             <Button
               type="submit"
               fullWidth
