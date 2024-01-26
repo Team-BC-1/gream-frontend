@@ -13,18 +13,24 @@ function BuyBidBox ({ wantBuyPrice, onChangeWantBuyPrice, productId, tabIndex, i
   const navigate = useNavigate()
 
   const buyBidMutation = useMutation(({
-    mutationFn: (price) => axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/api/buy/${productId}`,
-      {
-        price: price
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Token': accessToken,
-          'Refresh-Token': refreshToken
-        }
-      }),
+    mutationFn: (price) => {
+      if (!Number.isInteger(parseInt(price)) || parseInt(price) <= 0) {
+        alert('정확한 가격을 입력해주세요.')
+        throw new Error('정확한 가격을 입력해주세요.')
+      }
+      axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/buy/${productId}`,
+        {
+          price: price
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Token': accessToken,
+            'Refresh-Token': refreshToken
+          }
+        })
+    },
     onSuccess: () => {
       alert('구매 입찰 제출 성공!')
       navigate('/profile')
