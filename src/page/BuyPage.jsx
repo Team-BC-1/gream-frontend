@@ -3,10 +3,9 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { Card, CardContent, Tab, Tabs } from '@mui/material'
+import { Tab, Tabs } from '@mui/material'
 import { useEffect, useState } from 'react'
 import useUserInfoStore from '../store/userInfo.js'
-import Typography from '@mui/material/Typography'
 import BuyBidBox from '../component/order/BuyBidBox.jsx'
 import BuyNowBox from '../component/order/BuyNowBox.jsx'
 
@@ -50,13 +49,6 @@ function BuyPage () {
             width: 500
           }}
           >
-            <Card sx={{ width: '100%' }}>
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {nickname}
-                </Typography>
-              </CardContent>
-            </Card>
             <Box sx={{ flex: 1 }}>
               <Box sx={{ flex: 1 }}>즉시 구매가 : {
                 querySellBid.data.data.data[0]?.sellPrice === undefined ? '매물이 없습니다.' : addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)

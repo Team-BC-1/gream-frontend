@@ -62,13 +62,6 @@ function SellPage () {
             width: 500
           }}
           >
-            <Card sx={{ width: '100%' }}>
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {nickname}
-                </Typography>
-              </CardContent>
-            </Card>
             <Box sx={{ flex: 1 }}>
               <Box sx={{ flex: 1 }}>즉시 구매가 : {
                 querySellBid.data.data.data.length === 0 ? '매물이 없습니다.' : addCommasAtMoney(querySellBid.data.data.data[0].sellPrice)
