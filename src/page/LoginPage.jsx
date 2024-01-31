@@ -89,9 +89,17 @@ export default function LoginPage () {
                 />
               </Grid>
             </Grid>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Login
-            </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, width: 300, height: 44 }}>
+                Login
+              </Button>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Link
+                href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=f9caea9346bfa7cf3875aeda822a3f0e&redirect_uri=http://localhost:5173/login/kakao">
+                <Box component="img" src="/kakao_login_medium_wide.png"/>
+              </Link>
+            </Box>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link onClick={() => navigate('/signup')} variant="body2">
