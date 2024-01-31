@@ -6,6 +6,7 @@ import ProductPage from './page/ProductPage.jsx'
 import ProfilePage from './page/ProfilePage.jsx'
 import BuyPage from './page/BuyPage.jsx'
 import SellPage from './page/SellPage.jsx'
+import KakaoLoginPage from './page/KakaoLoginPage.jsx'
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
         <Route path="/products/:productId" element={<ProductPage/>}/>
         <Route path="/buy/:productId" element={<BuyPage/>}/>
         <Route path="/sell/:productId" element={<SellPage/>}/>
+        <Route path="/login/kakao" element={<KakaoLoginPage/>}/>
       </Routes>
     </BrowserRouter>
   )
