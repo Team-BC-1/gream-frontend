@@ -96,7 +96,7 @@ export default function LoginPage () {
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Link
-                href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=f9caea9346bfa7cf3875aeda822a3f0e&redirect_uri=http://localhost:5173/login/kakao">
+                href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=f9caea9346bfa7cf3875aeda822a3f0e&redirect_uri=${import.meta.env.VITE_REDIRECT_SOCIAL_URL}`}>
                 <Box component="img" src="/kakao_login_medium_wide.png"/>
               </Link>
             </Box>
