@@ -18,8 +18,8 @@ function KakaoLoginPage () {
       `${import.meta.env.VITE_SERVER_URL}/api/users/oauth/kakao?code=${code}`
     ),
     onSuccess: (data) => {
-      const { loginId, nickname, likeProductIds } = data.data.data
-      login(data.headers['access-token'], data.headers['refresh-token'], nickname, loginId, likeProductIds)
+      const { loginId, nickname, likeProductIds, role } = data.data.data
+      login(data.headers['access-token'], data.headers['refresh-token'], nickname, loginId, likeProductIds, role)
       navigate('/')
     },
     onError: error => {
