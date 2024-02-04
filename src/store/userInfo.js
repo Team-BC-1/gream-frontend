@@ -8,6 +8,7 @@ const useUserInfoStore = create(
       refreshToken: '',
       nickname: '',
       loginId: '',
+      role: '',
       likes: [],
       setAccessToken: (accessToken) => set({ accessToken }),
       setRefreshToken: (refreshToken) => set({ refreshToken }),
@@ -16,13 +17,14 @@ const useUserInfoStore = create(
       setLikes: (likes) => set({ likes: [...likes] }),
       addLike: (like) => set(state => ({ likes: [...state.likes, like] })),
       deleteLike: (like) => set(state => ({ likes: state.likes.filter(l => l !== like) })),
-      reset: () => set({ accessToken: '', refreshToken: '', nickname: '', loginId: '', likes: [] }),
-      login: (accessToken, refreshToken, nickname, loginId, likes) => set({
+      reset: () => set({ accessToken: '', refreshToken: '', nickname: '', loginId: '', likes: [], role: '' }),
+      login: (accessToken, refreshToken, nickname, loginId, likes, role) => set({
         accessToken,
         refreshToken,
         nickname,
         loginId,
-        likes
+        likes,
+        role
       })
     }),
     {
