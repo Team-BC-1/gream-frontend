@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import { Card, CardContent } from '@mui/material'
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined'
 import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import SellOnprogressHistoryList from '../component/profile/SellOnprogressHistoryList.jsx'
 import SellEndHistoryList from '../component/profile/SellEndHistoryList.jsx'
 import BuyEndHistoryList from '../component/profile/BuyEndHistoryList.jsx'
@@ -36,6 +36,29 @@ function ProfilePage () {
         }
       }
     )
+  })
+
+  const mutationPointRefund = useMutation({
+    mutationFn: (point) => axios.post(`${import.meta.env.VITE_SERVER_URL}/api/users/points/refunds`,
+      {
+        point,
+        'bank': '우리은행',
+        'accountNumber': '1002-123-456789',
+      },
+      {
+        headers: {
+          'Access-Token': accessToken,
+          'Refresh-Token': refreshToken
+        }
+      }
+    ),
+    onSuccess: () => {
+      alert('환전 신청이 완료되었습니다.')
+      queryUserPont.refetch()
+    },
+    onError: error => {
+      alert(error.response.data.message)
+    }
   })
 
   return (
@@ -78,7 +101,7 @@ function ProfilePage () {
               if (wantPoint === null) {
                 return
               }
-
+              mutationPointRefund.mutate(parseInt(wantPoint))
             }}>
               포인트 환전
             </Button>
