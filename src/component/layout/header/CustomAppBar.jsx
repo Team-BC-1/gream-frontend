@@ -14,6 +14,7 @@ const CustomAppBar = () => {
     nickname,
     accessToken,
     refreshToken,
+    role,
     reset
   } = useUserInfoStore()
   const mutation = useMutation({
@@ -66,6 +67,39 @@ const CustomAppBar = () => {
             }}
           />
           <Box>
+            <Button
+              style={{
+                textTransform: 'none',
+                visibility: role !== '관리자' ? 'hidden' : 'visible'
+              }}
+              color="inherit"
+              onClick={() => navigate('/refund')}
+              hidden={role !== '관리자'}
+            >
+              환급처리
+            </Button>
+            <Button
+              style={{
+                textTransform: 'none',
+                visibility: role !== '관리자' ? 'hidden' : 'visible'
+              }}
+              color="inherit"
+              onClick={() => navigate('/coupon')}
+              hidden={role !== '관리자'}
+            >
+              쿠폰발급
+            </Button>
+            <Button
+              style={{
+                textTransform: 'none',
+                visibility: role !== '관리자' ? 'hidden' : 'visible'
+              }}
+              color="inherit"
+              onClick={() => navigate('/product-add')}
+              hidden={role !== '관리자'}
+            >
+              상품등록
+            </Button>
             <Button style={{ textTransform: 'none' }} color="inherit" onClick={loginOrProfileHandler}>
               {nickname === '' ? 'LOGIN' : nickname}
             </Button>
