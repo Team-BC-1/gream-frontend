@@ -27,8 +27,8 @@ export default function LoginPage () {
         'Content-Type': 'application/json',
       }),
     onSuccess: (data) => {
-      const { loginId, nickname, likeProductIds } = data.data.data
-      login(data.headers['access-token'], data.headers['refresh-token'], nickname, loginId, likeProductIds)
+      const { loginId, nickname, likeProductIds, role } = data.data.data
+      login(data.headers['access-token'], data.headers['refresh-token'], nickname, loginId, likeProductIds, role)
       navigate('/')
     },
     onError: error => {
