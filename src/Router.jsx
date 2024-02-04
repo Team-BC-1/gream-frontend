@@ -7,6 +7,9 @@ import ProfilePage from './page/ProfilePage.jsx'
 import BuyPage from './page/BuyPage.jsx'
 import SellPage from './page/SellPage.jsx'
 import KakaoLoginPage from './page/KakaoLoginPage.jsx'
+import CouponPage from './page/CouponPage.jsx'
+import ProductAddPage from './page/ProductAddPage.jsx'
+import RefundPage from './page/RefundPage.jsx'
 
 const Router = () => {
   return (
@@ -20,6 +23,9 @@ const Router = () => {
         <Route path="/buy/:productId" element={<BuyPage/>}/>
         <Route path="/sell/:productId" element={<SellPage/>}/>
         <Route path="/login/kakao" element={<KakaoLoginPage/>}/>
+        <Route path="/coupon" element={<CouponPage/>}/>
+        <Route path="/product-add" element={<ProductAddPage/>}/>
+        <Route path="/refund" element={<RefundPage/>}/>
       </Routes>
     </BrowserRouter>
   )
