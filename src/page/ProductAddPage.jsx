@@ -18,7 +18,7 @@ function ProductAddPage () {
   const [brand, setBrand] = useState('')
   const [productName, setProductName] = useState('')
   const [description, setDescription] = useState('')
-  const [imageUrl, setImageUrl] = useState('')
+  const [imageFile, setImageFile] = useState()
   const [price, setPrice] = useState(0)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function ProductAddPage () {
       couponData,
       {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
           'Access-Token': accessToken,
           'Refresh-Token': refreshToken
         }
@@ -51,14 +51,13 @@ function ProductAddPage () {
 
   const onClick = (event) => {
     event.preventDefault()
-    const productData = {
-      brand: brand,
-      name: productName,
-      description: description,
-      imageUrl: 'https://cataas.com/cat',
-      price: price
-    }
-    mutation.mutate(productData)
+    const formData = new FormData()
+    formData.append('brand', brand)
+    formData.append('name', productName)
+    formData.append('description', description)
+    formData.append('price', price)
+    formData.append('file', imageFile, imageFile.name)
+    mutation.mutate(formData)
   }
 
   return (
@@ -122,6 +121,25 @@ function ProductAddPage () {
               value={description}
               onChange={(event) => setDescription(event.target.value)}
             />
+
+            <Button
+              variant="contained"
+              component="label"
+              sx={{ marginY: 2 }}
+            >
+              기프티콘 이미지 업로드
+              <input
+                type="file"
+                hidden
+                onClick={() => {
+                  alert('현재는 테스트 환경이고, 기프티콘 검수 API는 사업자 등록이 필요하여 미구현 상태입니다. 따라서 실제 기프티콘 이미지를 넣지 말아 주세요.')
+                }}
+                onChange={(event) => {
+                  event.preventDefault()
+                  setImageFile(event.target.files[0])
+                }}
+              />
+            </Button>
             <Button
               type="submit"
               fullWidth
