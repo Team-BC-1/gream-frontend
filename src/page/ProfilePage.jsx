@@ -92,7 +92,12 @@ function ProfilePage () {
               if (wantPoint === null) {
                 return
               }
-
+              const point = parseInt(wantPoint)
+              if (point < 500) {
+                alert('500 이상부터 충전 가능합니다.')
+                return
+              }
+              navigate(`/pay?point=${point}`)
             }}>
               포인트 충전
             </Button>
