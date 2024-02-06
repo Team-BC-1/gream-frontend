@@ -6,6 +6,8 @@ import ProductPage from './page/ProductPage.jsx'
 import ProfilePage from './page/ProfilePage.jsx'
 import BuyPage from './page/BuyPage.jsx'
 import SellPage from './page/SellPage.jsx'
+import { CheckoutPage } from './page/CheckoutPage.jsx'
+import { PaymentProcessPage } from './page/PaymentProcessPage.jsx'
 import KakaoLoginPage from './page/KakaoLoginPage.jsx'
 import CouponPage from './page/CouponPage.jsx'
 import ProductAddPage from './page/ProductAddPage.jsx'
@@ -26,6 +28,8 @@ const Router = () => {
         <Route path="/coupon" element={<CouponPage/>}/>
         <Route path="/product-add" element={<ProductAddPage/>}/>
         <Route path="/refund" element={<RefundPage/>}/>
+        <Route path="/pay" element={<CheckoutPage/>}/>
+        <Route path="/success" element={<PaymentProcessPage/>}/>
       </Routes>
     </BrowserRouter>
   )
