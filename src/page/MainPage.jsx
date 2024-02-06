@@ -14,7 +14,6 @@ function MainPage () {
   const [searchValue, setSearchValue] = useState('')
   const [searchParams] = useSearchParams()
   const name = searchParams.get('name')
-  console.log('searchParams', searchParams.get('name'))
 
   const query = useQuery({
     queryKey: ['products', name],
