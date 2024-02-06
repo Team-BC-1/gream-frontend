@@ -2,11 +2,11 @@ import axios from 'axios'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import Box from '@mui/material/Box'
 import useUserInfoStore from '../store/userInfo.js'
-import { Card, CardActions, CardContent, ListItem } from '@mui/material'
-import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../component/layout/Layout.jsx'
 import { useEffect } from 'react'
+import { Card, CardActions, CardContent, List, ListItem } from '@mui/material'
+import Button from '@mui/material/Button'
 
 function RefundPage () {
   const { accessToken, refreshToken, role } = useUserInfoStore()
@@ -31,7 +31,7 @@ function RefundPage () {
   })
 
   const mutationRefund = useMutation({
-    mutationFn: (refundId) => axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/admin/refunds/${refundId}`, {
+    mutationFn: (refundId) => axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/admin/refund/${refundId}`, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Token': accessToken,
@@ -50,25 +50,27 @@ function RefundPage () {
   return (
     <Layout>
       <Box component="h1">환급 요청 리스트</Box>
-      {
-        query.isSuccess && query.data.data.data.map(refund => (
-          <ListItem key={refund.refundId}>
-            <Card sx={{ fontSize: 15, marginX: 1, width: 200 }}>
-              <CardContent>유저아이디 : {refund.userId}</CardContent>
-              <CardContent>환급 포인트 : {refund.refundPoint}</CardContent>
-              <CardContent>은행 : {refund.refundBank}</CardContent>
-              <CardContent>계좌 : {refund.refundAccountNumber}</CardContent>
-              <CardActions>
-                <Button
-                  variant="contained"
-                  onClick={() => mutationRefund.mutate(refund.refundId)}>
-                  환급 처리
-                </Button>
-              </CardActions>
-            </Card>
-          </ListItem>
-        ))
-      }
+      <List sx={{ maxWidth: 1200, marginBottom: 10, display: 'flex', flexDirection: 'row', overflow: 'scroll' }}>
+        {
+          query.isSuccess && query.data.data.data.map(refund => (
+            <ListItem key={refund.refundId}>
+              <Card sx={{ fontSize: 15, marginX: 1, width: 200 }}>
+                <CardContent>유저아이디 : {refund.userId}</CardContent>
+                <CardContent>환급 포인트 : {refund.refundPoint}</CardContent>
+                <CardContent>은행 : {refund.refundBank}</CardContent>
+                <CardContent>계좌 : {refund.refundAccountNumber}</CardContent>
+                <CardActions>
+                  <Button
+                    variant="contained"
+                    onClick={() => mutationRefund.mutate(refund.refundId)}>
+                    환급 처리
+                  </Button>
+                </CardActions>
+              </Card>
+            </ListItem>
+          ))
+        }
+      </List>
     </Layout>
   )
 }
