@@ -23,6 +23,7 @@ jobs:
           touch .env
           echo VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }} >> .env
           echo VITE_REDIRECT_SOCIAL_URL=${{ secrets.VITE_REDIRECT_SOCIAL_URL }} >> .env
+          echo VITE_TOSS_CLIENT_API_KEY=${{ secrets.VITE_TOSS_CLIENT_API_KEY }} >> .env
 
       - name: Install
         run: npm install
