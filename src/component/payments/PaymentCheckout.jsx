@@ -24,6 +24,7 @@ export function PaymentCheckout ({ price }) {
 
   useEffect(() => {
     if (paymentWidget == null) {
+      console.error('paymentWidget : ' + paymentWidget)
       return
     }
 
